@@ -152,6 +152,7 @@ func Init(opts *Options) {
 	std = New(opts)
 }
 
+// New new logger with options
 func New(opts *Options) *zapLogger {
 	if opts == nil {
 		opts = NewOptions()

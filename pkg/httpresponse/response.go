@@ -14,6 +14,7 @@ type ErrResponse struct {
 	Reference string `json:"reference,omitempty"`
 }
 
+// WriteResponse 解析错误中的错误码等消息，通过gin框架返回
 func WriteResponse(c *gin.Context, err error, data interface{}) {
 	if err != nil {
 		log.Errorf("%#+v", err)
