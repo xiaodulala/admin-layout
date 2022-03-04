@@ -3,15 +3,19 @@ module github.com/xiaodulala/admin-layout
 go 1.17
 
 require (
+	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/gosuri/uitable v0.0.4
 	github.com/json-iterator/go v1.1.12
+	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6
 	github.com/novalagung/gubrak v1.0.0
 	github.com/spf13/pflag v1.0.5
 	go.uber.org/zap v1.21.0
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
 	golang.org/x/tools v0.1.9
 )
 
 require (
+	github.com/Azure/go-ansiterm v0.0.0-20210617225240-d185dfc1b5a1 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
