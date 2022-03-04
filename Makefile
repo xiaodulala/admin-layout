@@ -3,7 +3,7 @@
 .DEFAULT_GOAL := all
 
 .PHONY: all
-all: clean tidy install  build   # lint暂时不能通过
+all: clean tidy swagger  build   # lint暂时不能通过
 
 # ==============================================================================
 # Build options
