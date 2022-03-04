@@ -1,0 +1,21 @@
+basePath: /
+consumes:
+- application/json
+host: localhost:9099
+info:
+  title: admin-layout  Server API.
+  version: 1.0.0
+paths: {}
+produces:
+- application/json
+schemes:
+- http
+- https
+securityDefinitions:
+  api_key:
+    in: header
+    name: Authorization
+    type: apiKey
+  basic:
+    type: basic
+swagger: "2.0"
