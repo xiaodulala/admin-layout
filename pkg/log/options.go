@@ -3,7 +3,7 @@ package log
 import (
 	"fmt"
 	"github.com/spf13/pflag"
-	"github.com/xiaodulala/admin-layout/component/json"
+	"github.com/xiaodulala/admin-layout/pkg/json"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"strings"
