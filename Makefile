@@ -8,7 +8,7 @@ all: clean tidy swagger  build   # lint暂时不能通过
 # ==============================================================================
 # Build options
 ROOT_PACKAGE=github.com/xiaodulala/admin-layout
-VERSION_PACKAGE=github.com/xiaodulala/admin-layout/component/version
+VERSION_PACKAGE=github.com/xiaodulala/admin-layout/pkg/version
 
 
 # ==============================================================================

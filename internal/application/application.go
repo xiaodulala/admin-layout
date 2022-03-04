@@ -8,6 +8,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
 	"github.com/xiaodulala/admin-layout/internal/application/config"
+	"github.com/xiaodulala/admin-layout/internal/application/router"
 	"github.com/xiaodulala/admin-layout/pkg/db/mysql"
 	"github.com/xiaodulala/admin-layout/pkg/log"
 	"github.com/xiaodulala/admin-layout/pkg/mycasbin"
@@ -41,6 +42,12 @@ func createApp(cfg *config.Config) (*Application, error) {
 		return nil, err
 	}
 
+	// gin配置
+	gin.SetMode(cfg.ServerOptions.Mode)
+	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
+		log.Infof("%-6s %-s --> %s (%d handlers)", httpMethod, absolutePath, handlerName, nuHandlers)
+	}
+
 	return &Application{
 		orm:    db,
 		casbin: e,
@@ -50,7 +57,10 @@ func createApp(cfg *config.Config) (*Application, error) {
 }
 
 func (app *Application) PrepareRun() *Application {
+
 	//初始化路由
+	router.LoadRouter(app.config, app.engine)
+
 	app.prepare = true
 	return app
 }
