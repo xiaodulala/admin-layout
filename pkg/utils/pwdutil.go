@@ -8,8 +8,11 @@ func Encrypt(source string) (string, error) {
 	return string(hashBytes), err
 }
 
-
-// Compare 比较密码
-func Compare(hashedPassword, password string) error {
-	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+// CompareHashAndPassword 比较密码
+func CompareHashAndPassword(e string, p string) (bool, error) {
+	err := bcrypt.CompareHashAndPassword([]byte(e), []byte(p))
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }

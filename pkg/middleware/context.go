@@ -7,6 +7,7 @@ import (
 
 const (
 	UsernameKey = "username"
+	UserId      = "userId"
 )
 
 // Context 将上下文的键值设置为log包支持的键值，以通过中间件打印gin日志时带有上下文信息
@@ -19,4 +20,8 @@ func Context() gin.HandlerFunc {
 		c.Set(log.KeyUsername, c.GetString(UsernameKey))
 		c.Next()
 	}
+}
+
+func GetUserId(c *gin.Context) int {
+	return c.GetInt(UserId)
 }

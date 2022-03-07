@@ -10,6 +10,7 @@ type ServerOptions struct {
 	BindAddress string   `json:"bind-address" mapstructure:"bind-address"`
 	BindPort    int      `json:"bind-port"    mapstructure:"bind-port"`
 	Middlewares []string `json:"middlewares" mapstructure:"middlewares"`
+	EnableDp    bool     `json:"enabledp" mapstructure:"enabledp"`
 }
 
 func NewServerOptions() *ServerOptions {
@@ -39,4 +40,5 @@ func (o *ServerOptions) AddFlags(fs *pflag.FlagSet) {
 	fs.IntVar(&o.BindPort, "server.bind-port", o.BindPort, "set port with bind.address.")
 	fs.StringSliceVar(&o.Middlewares, "server.middlewares", o.Middlewares, ""+
 		"List of allowed middlewares for server, comma separated. If this list is empty default middlewares will be used.")
+	fs.BoolVar(&o.EnableDp, "server.enable-dp", o.EnableDp, "set data scope enable,default false.")
 }

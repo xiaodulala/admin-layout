@@ -25,3 +25,17 @@
 //
 // swagger:meta
 package docs
+
+import "github.com/xiaodulala/admin-layout/pkg/httpresponse"
+
+// swagger:response errResponse
+type errResponseWrapper struct {
+	// in:body
+	Body httpresponse.ErrResponse
+}
+
+// swagger:response successResponse
+type successResponseWrapper struct {
+	// in:body
+	Body httpresponse.Response
+}

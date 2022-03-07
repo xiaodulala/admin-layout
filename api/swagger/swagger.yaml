@@ -1,13 +1,314 @@
 basePath: /
 consumes:
 - application/json
+definitions:
+  ErrResponse:
+    description: ErrResponse 用来返回错误消息的结构
+    properties:
+      code:
+        format: int64
+        type: integer
+        x-go-name: Code
+      message:
+        type: string
+        x-go-name: Message
+      reference:
+        type: string
+        x-go-name: Reference
+      requestId:
+        type: string
+        x-go-name: RequestId
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/pkg/httpresponse
+  PassWord:
+    description: PassWord 密码
+    properties:
+      newPassword:
+        type: string
+        x-go-name: NewPassword
+      oldPassword:
+        type: string
+        x-go-name: OldPassword
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  ResetSysUserPwdReq:
+    properties:
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      password:
+        type: string
+        x-go-name: Password
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      userId:
+        format: int64
+        type: integer
+        x-go-name: UserId
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  Response:
+    properties:
+      data:
+        type: object
+        x-go-name: Data
+      requestId:
+        type: string
+        x-go-name: RequestId
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/pkg/httpresponse
+  SysUserInsertReq:
+    properties:
+      avatar:
+        type: string
+        x-go-name: Avatar
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      deptId:
+        format: int64
+        type: integer
+        x-go-name: DeptId
+      email:
+        type: string
+        x-go-name: Email
+      nickName:
+        type: string
+        x-go-name: NickName
+      password:
+        type: string
+        x-go-name: Password
+      phone:
+        type: string
+        x-go-name: Phone
+      postId:
+        format: int64
+        type: integer
+        x-go-name: PostId
+      remark:
+        type: string
+        x-go-name: Remark
+      roleId:
+        format: int64
+        type: integer
+        x-go-name: RoleId
+      sex:
+        type: string
+        x-go-name: Sex
+      status:
+        type: string
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      userId:
+        format: int64
+        type: integer
+        x-go-name: UserId
+      username:
+        type: string
+        x-go-name: Username
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysUserUpdateReq:
+    properties:
+      avatar:
+        type: string
+        x-go-name: Avatar
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      deptId:
+        format: int64
+        type: integer
+        x-go-name: DeptId
+      email:
+        type: string
+        x-go-name: Email
+      nickName:
+        type: string
+        x-go-name: NickName
+      phone:
+        type: string
+        x-go-name: Phone
+      postId:
+        format: int64
+        type: integer
+        x-go-name: PostId
+      remark:
+        type: string
+        x-go-name: Remark
+      roleId:
+        format: int64
+        type: integer
+        x-go-name: RoleId
+      sex:
+        type: string
+        x-go-name: Sex
+      status:
+        type: string
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      userId:
+        format: int64
+        type: integer
+        x-go-name: UserId
+      username:
+        type: string
+        x-go-name: Username
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  UpdateSysUserStatusReq:
+    properties:
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      status:
+        type: string
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      userId:
+        format: int64
+        type: integer
+        x-go-name: UserId
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
 host: localhost:9099
 info:
   title: admin-layout  Server API.
   version: 1.0.0
-paths: {}
+paths:
+  /api/v1/sys/user:
+    delete:
+      description: 删除用户
+      operationId: sysUserDelete
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        type: string
+        x-go-name: UserId
+      responses: {}
+      tags:
+      - 系统用户管理
+    get:
+      description: 分页查询用户
+      operationId: sysUserGetPage
+      parameters:
+      - in: query
+        name: username
+        type: string
+        x-go-name: Username
+      responses: {}
+      tags:
+      - 系统用户管理
+    post:
+      description: 创建用户
+      operationId: sysUserInsert
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysUserInsertReq'
+      responses: {}
+      tags:
+      - 系统用户管理
+    put:
+      description: 更新用户
+      operationId: sysUserUpdate
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysUserUpdateReq'
+      responses: {}
+      tags:
+      - 系统用户管理
+  /api/v1/sys/user/{userId}:
+    get:
+      description: 查询用户
+      operationId: sysUserGet
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        type: string
+        x-go-name: UserId
+      responses: {}
+      tags:
+      - 系统用户管理
+  /api/v1/sys/user/avatar:
+    post:
+      description: 修改用户头像
+      operationId: sysUserAvatar
+      responses: {}
+      tags:
+      - 系统用户管理
+  /api/v1/sys/user/profile:
+    get:
+      description: 获取用户个人中心
+      operationId: 系统用户管理
+      responses: {}
+  /api/v1/sys/user/pwd/reset:
+    put:
+      description: 重置密码
+      operationId: sysUserPwdReset
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/ResetSysUserPwdReq'
+      responses: {}
+      tags:
+      - 系统用户管理
+  /api/v1/sys/user/pwd/set:
+    put:
+      description: 修改密码
+      operationId: sysUserPwdSet
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/PassWord'
+      responses: {}
+      tags:
+      - 系统用户管理
+  /api/v1/sys/user/status:
+    put:
+      description: 修改用户状态
+      operationId: sysUserStatus
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/UpdateSysUserStatusReq'
+      responses: {}
+      tags:
+      - 系统用户管理
 produces:
 - application/json
+responses:
+  errResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/ErrResponse'
+  successResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/Response'
 schemes:
 - http
 - https

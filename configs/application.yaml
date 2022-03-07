@@ -4,6 +4,7 @@ server:
   bind-address: 0.0.0.0 # 绑定的不安全 IP 地址，设置为 0.0.0.0 表示使用全部网络接口，默认为 127.0.0.1
   bind-port: 9099 # 提供非安全认证的监听端口，默认为 8080
   middlewares: recovery,secure,nocache,cors,logger # 加载的 gin 中间件列表，多个中间件，逗号(,)隔开 支持 recovery,secure,nocache,cors,logger
+  enabledp: true # 数据权限开关
 
 
 # MySQL 数据库相关配置

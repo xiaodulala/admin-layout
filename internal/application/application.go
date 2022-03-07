@@ -4,16 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/casbin/casbin/v2"
 	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
 	"github.com/xiaodulala/admin-layout/internal/application/config"
 	"github.com/xiaodulala/admin-layout/internal/application/router"
+	"github.com/xiaodulala/admin-layout/internal/pkg/runtime"
 	"github.com/xiaodulala/admin-layout/pkg/db/mysql"
 	"github.com/xiaodulala/admin-layout/pkg/log"
 	"github.com/xiaodulala/admin-layout/pkg/mycasbin"
 	"github.com/xiaodulala/admin-layout/pkg/utils"
-	"gorm.io/gorm"
 	"net"
 	"net/http"
 	"os"
@@ -23,11 +22,8 @@ import (
 )
 
 type Application struct {
-	prepare bool
-	orm     *gorm.DB
-	casbin  *casbin.SyncedEnforcer
-	engine  *gin.Engine
-	config  *config.Config
+	prepare  bool
+	resource *runtime.Resource
 }
 
 func createApp(cfg *config.Config) (*Application, error) {
@@ -42,24 +38,25 @@ func createApp(cfg *config.Config) (*Application, error) {
 		return nil, err
 	}
 
+	engine := gin.New()
 	// gin配置
 	gin.SetMode(cfg.ServerOptions.Mode)
 	gin.DebugPrintRouteFunc = func(httpMethod, absolutePath, handlerName string, nuHandlers int) {
 		log.Infof("%-6s %-s --> %s (%d handlers)", httpMethod, absolutePath, handlerName, nuHandlers)
 	}
 
+	resource := runtime.New(db, e, engine, cfg)
+	runtime.RunTime = resource
+
 	return &Application{
-		orm:    db,
-		casbin: e,
-		engine: gin.New(),
-		config: cfg,
+		resource: resource,
 	}, nil
 }
 
 func (app *Application) PrepareRun() *Application {
 
 	//初始化路由
-	router.LoadRouter(app.config, app.engine)
+	router.LoadRouter(app.resource.Config(), app.resource.Engine())
 
 	app.prepare = true
 	return app
@@ -72,8 +69,8 @@ func (app *Application) Run() error {
 	}
 
 	httpServer := &http.Server{
-		Addr:    net.JoinHostPort(app.config.ServerOptions.BindAddress, strconv.Itoa(app.config.ServerOptions.BindPort)),
-		Handler: app.engine,
+		Addr:    net.JoinHostPort(app.resource.Config().ServerOptions.BindAddress, strconv.Itoa(app.resource.Config().ServerOptions.BindPort)),
+		Handler: app.resource.Engine(),
 	}
 
 	go func() {
@@ -104,7 +101,7 @@ func (app *Application) printRunInfo() {
 	fmt.Println(color.GreenString(LogoContent))
 
 	fmt.Println(color.YellowString("server run at:"))
-	fmt.Printf("-  Local:   http://localhost:%d/ \n", app.config.ServerOptions.BindPort)
-	fmt.Printf("-  Network: http://%s:%d/ \r\n", utils.GetLocalIP(), app.config.ServerOptions.BindPort)
+	fmt.Printf("-  Local:   http://localhost:%d/ \n", app.resource.Config().ServerOptions.BindPort)
+	fmt.Printf("-  Network: http://%s:%d/ \r\n", utils.GetLocalIP(), app.resource.Config().ServerOptions.BindPort)
 	fmt.Printf("Enter Control + C Shutdown Server \r\n")
 }

@@ -12,7 +12,7 @@ import (
 	"mime"
 )
 
-var appRouters = make([]func(), 0)
+var appRouters = make([]func(engine *gin.Engine), 0)
 
 func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 	// 必须的插件
@@ -34,16 +34,16 @@ func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 
 	// 404
 	engine.NoRoute(func(c *gin.Context) {
-		httpresponse.WriteResponse(c, errors.WithCode(code.ErrPageNotFound, ""), nil)
+		httpresponse.WriteErrResponse(c, errors.WithCode(code.ErrPageNotFound, ""), nil)
 	})
 
 	//基础路由
 	engine.GET("/healthz", func(c *gin.Context) {
-		httpresponse.WriteResponse(c, nil, map[string]string{"status": "ok"})
+		httpresponse.WriteSuccessResponse(c, map[string]string{"status": "ok"})
 	})
 
 	engine.GET("version", func(c *gin.Context) {
-		httpresponse.WriteResponse(c, nil, version.Get())
+		httpresponse.WriteSuccessResponse(c, version.Get())
 	})
 
 	// 静态路由文件
@@ -60,6 +60,6 @@ func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 
 	// 系统路由和业务路由
 	for _, f := range appRouters {
-		f()
+		f(engine)
 	}
 }
