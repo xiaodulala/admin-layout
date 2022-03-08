@@ -60,6 +60,308 @@ definitions:
         x-go-name: RequestId
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/pkg/httpresponse
+  SysApi:
+    properties:
+      action:
+        type: string
+        x-go-name: Action
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      createdAt:
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      handle:
+        type: string
+        x-go-name: Handle
+      id:
+        format: int64
+        type: integer
+        x-go-name: Id
+      path:
+        type: string
+        x-go-name: Path
+      title:
+        type: string
+        x-go-name: Title
+      type:
+        type: string
+        x-go-name: Type
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      updatedAt:
+        format: date-time
+        type: string
+        x-go-name: UpdatedAt
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/models
+  SysDept:
+    properties:
+      children:
+        items:
+          $ref: '#/definitions/SysDept'
+        type: array
+        x-go-name: Children
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      createdAt:
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      dataScope:
+        type: string
+        x-go-name: DataScope
+      deptId:
+        format: int64
+        type: integer
+        x-go-name: DeptId
+      deptName:
+        type: string
+        x-go-name: DeptName
+      deptPath:
+        type: string
+        x-go-name: DeptPath
+      email:
+        type: string
+        x-go-name: Email
+      leader:
+        type: string
+        x-go-name: Leader
+      params:
+        type: string
+        x-go-name: Params
+      parentId:
+        format: int64
+        type: integer
+        x-go-name: ParentId
+      phone:
+        type: string
+        x-go-name: Phone
+      sort:
+        format: int64
+        type: integer
+        x-go-name: Sort
+      status:
+        format: int64
+        type: integer
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      updatedAt:
+        format: date-time
+        type: string
+        x-go-name: UpdatedAt
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/models
+  SysDeptInsertReq:
+    properties:
+      DeptId:
+        format: int64
+        type: integer
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      deptName:
+        type: string
+        x-go-name: DeptName
+      deptPath:
+        type: string
+        x-go-name: DeptPath
+      email:
+        type: string
+        x-go-name: Email
+      leader:
+        type: string
+        x-go-name: Leader
+      parentId:
+        format: int64
+        type: integer
+        x-go-name: ParentId
+      phone:
+        type: string
+        x-go-name: Phone
+      sort:
+        format: int64
+        type: integer
+        x-go-name: Sort
+      status:
+        format: int64
+        type: integer
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysMenu:
+    properties:
+      RoleId:
+        format: int64
+        type: integer
+      action:
+        type: string
+        x-go-name: Action
+      apis:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Apis
+      breadcrumb:
+        type: string
+        x-go-name: Breadcrumb
+      children:
+        items:
+          $ref: '#/definitions/SysMenu'
+        type: array
+        x-go-name: Children
+      component:
+        type: string
+        x-go-name: Component
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      createdAt:
+        format: date-time
+        type: string
+        x-go-name: CreatedAt
+      dataScope:
+        type: string
+        x-go-name: DataScope
+      icon:
+        type: string
+        x-go-name: Icon
+      is_select:
+        type: boolean
+        x-go-name: IsSelect
+      isFrame:
+        type: string
+        x-go-name: IsFrame
+      menuId:
+        format: int64
+        type: integer
+        x-go-name: MenuId
+      menuName:
+        type: string
+        x-go-name: MenuName
+      menuType:
+        type: string
+        x-go-name: MenuType
+      noCache:
+        type: boolean
+        x-go-name: NoCache
+      params:
+        type: string
+        x-go-name: Params
+      parentId:
+        format: int64
+        type: integer
+        x-go-name: ParentId
+      path:
+        type: string
+        x-go-name: Path
+      paths:
+        type: string
+        x-go-name: Paths
+      permission:
+        type: string
+        x-go-name: Permission
+      sort:
+        format: int64
+        type: integer
+        x-go-name: Sort
+      sysApi:
+        items:
+          $ref: '#/definitions/SysApi'
+        type: array
+        x-go-name: SysApi
+      title:
+        type: string
+        x-go-name: Title
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+      updatedAt:
+        format: date-time
+        type: string
+        x-go-name: UpdatedAt
+      visible:
+        type: string
+        x-go-name: Visible
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/models
+  SysRoleDeleteReq:
+    properties:
+      ids:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Ids
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysRoleUpdateReq:
+    properties:
+      Admin:
+        type: boolean
+      DataScope:
+        type: string
+      DeptIds:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Flag:
+        type: string
+      MenuIds:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Remark:
+        type: string
+      RoleId:
+        format: int64
+        type: integer
+      RoleKey:
+        type: string
+      RoleName:
+        type: string
+      RoleSort:
+        format: int64
+        type: integer
+      Status:
+        type: string
+      SysDept:
+        items:
+          $ref: '#/definitions/SysDept'
+        type: array
+      SysMenu:
+        items:
+          $ref: '#/definitions/SysMenu'
+        type: array
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   SysUserInsertReq:
     properties:
       avatar:
@@ -191,6 +493,85 @@ info:
   title: admin-layout  Server API.
   version: 1.0.0
 paths:
+  /api/v1/sys/dept:
+    delete:
+      description: 删除部门
+      operationId: sysDeptDelete
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysRoleDeleteReq'
+      responses: {}
+      tags:
+      - 部门管理
+    get:
+      description: 分页查询部门
+      operationId: sysDeptGetPage
+      parameters:
+      - in: query
+        name: deptName
+        type: string
+        x-go-name: DeptName
+      - in: query
+        name: deptId
+        type: string
+        x-go-name: DeptId
+      - in: query
+        name: position
+        type: string
+        x-go-name: Position
+      responses: {}
+      tags:
+      - 部门管理
+    post:
+      description: 添加部门
+      operationId: sysDeptInsert
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysDeptInsertReq'
+      responses: {}
+      tags:
+      - 部门管理
+    put:
+      description: 修改部门
+      operationId: sysDeptUpdate
+      parameters:
+      - format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: Id
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysRoleUpdateReq'
+      responses: {}
+      tags:
+      - 部门管理
+  /api/v1/sys/dept/{deptId}:
+    get:
+      description: 获取部门数据
+      operationId: sysDeptGet
+      parameters:
+      - in: path
+        name: deptId
+        required: true
+        type: string
+        x-go-name: DeptId
+      responses: {}
+      tags:
+      - 部门管理
+  /api/v1/sys/dept/dept-tree:
+    get:
+      description: 用户管理左侧部门树
+      operationId: sysDeptTree
+      responses: {}
+      tags:
+      - 部门管理
   /api/v1/sys/user:
     delete:
       description: 删除用户
