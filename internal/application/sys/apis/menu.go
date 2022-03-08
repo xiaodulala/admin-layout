@@ -20,7 +20,7 @@ func (e SysMenu) GetPage(c *gin.Context) {
 	req := dto.SysMenuGetPageReq{}
 	err := e.MakeContext(c).
 		MakeOrm().
-		Bind(&req, binding.Form).
+		Bind(&req).
 		MakeService(&s.Service).
 		Errors
 	if err != nil {

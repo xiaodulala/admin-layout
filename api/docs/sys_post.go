@@ -56,7 +56,7 @@ type sysPostInsertWrapper struct {
 	Body dto.SysPostInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/post  系统岗位管理 sysPostUpdate
+// swagger:route PUT /api/v1/sys/post/{id}  系统岗位管理 sysPostUpdate
 //
 // 创建岗位
 //
@@ -68,6 +68,8 @@ type sysPostInsertWrapper struct {
 
 // swagger:parameters sysPostUpdate
 type sysPostUpdateWrapper struct {
+	// in:path
+	Id int `json:"id"`
 	// in:body
 	Body dto.SysPostUpdateReq
 }

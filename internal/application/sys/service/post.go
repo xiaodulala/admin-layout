@@ -58,6 +58,7 @@ func (e *SysPost) Insert(c *dto.SysPostInsertReq) error {
 	if err != nil {
 		return errors.WithCode(code.ErrDatabase, err.Error())
 	}
+	c.PostId = data.PostId
 	return nil
 }
 

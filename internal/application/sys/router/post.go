@@ -17,7 +17,7 @@ func registerSysPostRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlew
 		r.GET("", api.GetPage)
 		r.GET("/:id", api.Get)
 		r.POST("", api.Insert)
-		r.PUT("", api.Update)
+		r.PUT("/:id", api.Update)
 		r.DELETE("", api.Delete)
 	}
 }

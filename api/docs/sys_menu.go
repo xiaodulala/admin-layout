@@ -15,7 +15,7 @@ import "github.com/xiaodulala/admin-layout/internal/application/sys/service/dto"
 // swagger:parameters sysMenuGetPage
 type sysMenuGetPageWrapper struct {
 	// in:query
-	MenuName string `json:"menuName"`
+	dto.SysMenuGetPageReq
 }
 
 // swagger:route GET /api/v1/sys/menu/{id}  系统菜单管理 sysMenuGet

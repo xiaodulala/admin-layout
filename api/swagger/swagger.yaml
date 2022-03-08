@@ -890,10 +890,25 @@ paths:
       description: 分页查询菜单列表数据
       operationId: sysMenuGetPage
       parameters:
+      - format: int64
+        in: query
+        name: pageIndex
+        type: integer
+        x-go-name: PageIndex
+      - format: int64
+        in: query
+        name: pageSize
+        type: integer
+        x-go-name: PageSize
       - in: query
-        name: menuName
+        name: title
         type: string
-        x-go-name: MenuName
+        x-go-name: Title
+      - format: int64
+        in: query
+        name: visible
+        type: integer
+        x-go-name: Visible
       responses: {}
       tags:
       - 系统菜单管理
@@ -999,10 +1014,17 @@ paths:
       responses: {}
       tags:
       - 系统岗位管理
+  /api/v1/sys/post/{id}:
     put:
       description: 创建岗位
       operationId: sysPostUpdate
       parameters:
+      - format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: Id
       - in: body
         name: Body
         schema:
