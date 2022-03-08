@@ -320,6 +320,192 @@ definitions:
         x-go-name: Visible
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/models
+  SysMenuDeleteReq:
+    properties:
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      ids:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: Ids
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysMenuInsertReq:
+    properties:
+      Action:
+        type: string
+      Apis:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Breadcrumb:
+        type: string
+      Component:
+        type: string
+      Icon:
+        type: string
+      IsFrame:
+        type: string
+      MenuId:
+        format: int64
+        type: integer
+      MenuName:
+        type: string
+      MenuType:
+        type: string
+      NoCache:
+        type: boolean
+      ParentId:
+        format: int64
+        type: integer
+      Path:
+        type: string
+      Paths:
+        type: string
+      Permission:
+        type: string
+      Sort:
+        format: int64
+        type: integer
+      SysApi:
+        items:
+          $ref: '#/definitions/SysApi'
+        type: array
+      Title:
+        type: string
+      Visible:
+        type: string
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysMenuUpdateReq:
+    properties:
+      Action:
+        type: string
+      Apis:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Breadcrumb:
+        type: string
+      Component:
+        type: string
+      Icon:
+        type: string
+      IsFrame:
+        type: string
+      MenuId:
+        format: int64
+        type: integer
+      MenuName:
+        type: string
+      MenuType:
+        type: string
+      NoCache:
+        type: boolean
+      ParentId:
+        format: int64
+        type: integer
+      Path:
+        type: string
+      Paths:
+        type: string
+      Permission:
+        type: string
+      Sort:
+        format: int64
+        type: integer
+      SysApi:
+        items:
+          $ref: '#/definitions/SysApi'
+        type: array
+      Title:
+        type: string
+      Visible:
+        type: string
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysPostInsertReq:
+    description: SysPostInsertReq 增使用的结构体
+    properties:
+      PostCode:
+        type: string
+      PostId:
+        format: int64
+        type: integer
+      PostName:
+        type: string
+      Remark:
+        type: string
+      Sort:
+        format: int64
+        type: integer
+      Status:
+        format: int64
+        type: integer
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysPostUpdateReq:
+    description: SysPostUpdateReq 改使用的结构体
+    properties:
+      PostCode:
+        type: string
+      PostId:
+        format: int64
+        type: integer
+      PostName:
+        type: string
+      Remark:
+        type: string
+      Sort:
+        format: int64
+        type: integer
+      Status:
+        format: int64
+        type: integer
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   SysRoleDeleteReq:
     properties:
       ids:
@@ -657,6 +843,155 @@ paths:
       responses: {}
       tags:
       - 系统部门管理
+  /api/v1/sys/menu:
+    delete:
+      description: 删除菜单
+      operationId: sysMenuDelete
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysMenuDeleteReq'
+      responses: {}
+      tags:
+      - 系统菜单管理
+    get:
+      description: 分页查询菜单列表数据
+      operationId: sysMenuGetPage
+      parameters:
+      - in: query
+        name: menuName
+        type: string
+        x-go-name: MenuName
+      responses: {}
+      tags:
+      - 系统菜单管理
+    post:
+      description: 创建菜单
+      operationId: sysMenuInsert
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysMenuInsertReq'
+      responses: {}
+      tags:
+      - 系统菜单管理
+    put:
+      description: 更新菜单
+      operationId: sysMenuUpdate
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysMenuUpdateReq'
+      responses: {}
+      tags:
+      - 系统菜单管理
+  /api/v1/sys/menu/{id}:
+    get:
+      description: 根据id查询菜单详情
+      operationId: sysMenuGet
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: string
+        x-go-name: Id
+      responses: {}
+      tags:
+      - 系统菜单管理
+  /api/v1/sys/menu/menu-role:
+    get:
+      description: 根据登录角色名称获取菜单列表数据(左菜单使用)
+      operationId: sysMenuRole
+      responses: {}
+      tags:
+      - 系统菜单管理
+  /api/v1/sys/menu/menu-tree/{roleId}:
+    get:
+      description: 根据角色ID查询菜单下拉树结构  角色修改使用的菜单列表
+      operationId: sysMenuTreeSelect
+      parameters:
+      - format: int64
+        in: path
+        name: roleId
+        required: true
+        type: integer
+        x-go-name: RoleId
+      responses: {}
+      tags:
+      - 系统菜单管理
+  /api/v1/sys/post:
+    delete:
+      description: 创建岗位
+      operationId: sysPostDelete
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysMenuDeleteReq'
+      responses: {}
+      tags:
+      - 系统岗位管理
+    get:
+      description: 分页查询岗位
+      operationId: sysPostGetPage
+      parameters:
+      - in: query
+        name: postName
+        type: string
+        x-go-name: PostName
+      - in: query
+        name: postCode
+        type: string
+        x-go-name: PostCode
+      - in: query
+        name: postId
+        type: string
+        x-go-name: PostId
+      - in: query
+        name: status
+        type: string
+        x-go-name: Status
+      responses: {}
+      tags:
+      - 系统岗位管理
+    post:
+      description: 创建岗位
+      operationId: sysPostInsert
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysPostInsertReq'
+      responses: {}
+      tags:
+      - 系统岗位管理
+    put:
+      description: 创建岗位
+      operationId: sysPostUpdate
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysPostUpdateReq'
+      responses: {}
+      tags:
+      - 系统岗位管理
+  /api/v1/sys/post/{postId}:
+    get:
+      description: 查询详情
+      operationId: sysPostGet
+      parameters:
+      - in: path
+        name: postId
+        required: true
+        type: string
+        x-go-name: PostId
+      responses: {}
+      tags:
+      - 系统岗位管理
   /api/v1/sys/role:
     delete:
       description: 删除角色
