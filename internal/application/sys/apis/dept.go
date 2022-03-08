@@ -80,7 +80,7 @@ func (e SysDept) Insert(c *gin.Context) {
 		httpresponse.WriteErrResponse(c, err, nil)
 		return
 	}
-	httpresponse.WriteSuccessResponse(c, req.GetId())
+	httpresponse.WriteSuccessResponse(c, gin.H{"deptId": req.GetId()})
 }
 
 func (e SysDept) Update(c *gin.Context) {
@@ -101,7 +101,7 @@ func (e SysDept) Update(c *gin.Context) {
 		httpresponse.WriteErrResponse(c, err, nil)
 		return
 	}
-	httpresponse.WriteSuccessResponse(c, req.GetId())
+	httpresponse.WriteSuccessResponse(c, gin.H{"deptId": req.GetId()})
 }
 
 func (e SysDept) Delete(c *gin.Context) {
@@ -122,7 +122,7 @@ func (e SysDept) Delete(c *gin.Context) {
 		httpresponse.WriteErrResponse(c, err, nil)
 		return
 	}
-	httpresponse.WriteSuccessResponse(c, req.GetId())
+	httpresponse.WriteSuccessResponse(c, gin.H{"deptId": req.GetId()})
 }
 
 // Get2Tree 用户管理 左侧部门树

@@ -15,10 +15,11 @@ func registerSysDeptRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlew
 	r := g.Group("/dept")
 	{
 		r.GET("", api.GetPage)
-		r.GET("/:id", api.Get)
+		r.GET("/:deptId", api.Get)
 		r.POST("", api.Insert)
-		r.PUT("/:id", api.Update)
+		r.PUT("/:deptId", api.Update)
 		r.DELETE("", api.Delete)
-		r.GET("/deptTree", api.Get2Tree)
+		// fixme 待测试用处
+		// r.GET("/deptTree", api.Get2Tree)
 	}
 }

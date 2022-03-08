@@ -55,7 +55,7 @@ func (s *SysDeptInsertReq) GetId() interface{} {
 }
 
 type SysDeptUpdateReq struct {
-	DeptId   int    `uri:"id" comment:"编码"`                                         // 编码
+	DeptId   int    `uri:"deptId" comment:"编码"`                                     // 编码
 	ParentId int    `json:"parentId" comment:"上级部门" vd:"?"`                         //上级部门
 	DeptPath string `json:"deptPath" comment:""`                                    //路径
 	DeptName string `json:"deptName" comment:"部门名称" vd:"len($)>0"`                  //部门名称

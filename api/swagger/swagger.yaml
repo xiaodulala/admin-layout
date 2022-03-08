@@ -221,6 +221,48 @@ definitions:
         x-go-name: UpdateBy
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysDeptUpdateReq:
+    properties:
+      DeptId:
+        format: int64
+        type: integer
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      deptName:
+        type: string
+        x-go-name: DeptName
+      deptPath:
+        type: string
+        x-go-name: DeptPath
+      email:
+        type: string
+        x-go-name: Email
+      leader:
+        type: string
+        x-go-name: Leader
+      parentId:
+        format: int64
+        type: integer
+        x-go-name: ParentId
+      phone:
+        type: string
+        x-go-name: Phone
+      sort:
+        format: int64
+        type: integer
+        x-go-name: Sort
+      status:
+        format: int64
+        type: integer
+        x-go-name: Status
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   SysMenu:
     properties:
       RoleId:
@@ -788,10 +830,6 @@ paths:
         name: deptId
         type: string
         x-go-name: DeptId
-      - in: query
-        name: position
-        type: string
-        x-go-name: Position
       responses: {}
       tags:
       - 系统部门管理
@@ -803,23 +841,6 @@ paths:
         name: Body
         schema:
           $ref: '#/definitions/SysDeptInsertReq'
-      responses: {}
-      tags:
-      - 系统部门管理
-    put:
-      description: 修改部门
-      operationId: sysDeptUpdate
-      parameters:
-      - format: int64
-        in: path
-        name: id
-        required: true
-        type: integer
-        x-go-name: Id
-      - in: body
-        name: Body
-        schema:
-          $ref: '#/definitions/SysRoleUpdateReq'
       responses: {}
       tags:
       - 系统部门管理
@@ -836,10 +857,20 @@ paths:
       responses: {}
       tags:
       - 系统部门管理
-  /api/v1/sys/dept/dept-tree:
-    get:
-      description: 用户管理左侧部门树
-      operationId: sysDeptTree
+    put:
+      description: 修改部门
+      operationId: sysDeptUpdate
+      parameters:
+      - format: int64
+        in: path
+        name: deptId
+        required: true
+        type: integer
+        x-go-name: DeptId
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysDeptUpdateReq'
       responses: {}
       tags:
       - 系统部门管理

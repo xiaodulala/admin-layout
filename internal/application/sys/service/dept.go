@@ -31,6 +31,8 @@ func (e *SysDept) Get(d *dto.SysDeptGetReq, model *models.SysDept) error {
 
 		return errors.WithCode(code.ErrDatabase, err.Error())
 	}
+
+	// fixme 应该继续找子部门
 	return nil
 }
 
@@ -64,6 +66,7 @@ func (e *SysDept) Insert(c *dto.SysDeptInsertReq) error {
 	if err := tx.Model(&data).Update("dept_path", deptPath).Error; err != nil {
 		return errors.WithCode(code.ErrDatabase, err.Error())
 	}
+	c.DeptId = data.DeptId
 	return nil
 }
 
@@ -174,19 +177,20 @@ func (e *SysDept) SetDeptPage(c *dto.SysDeptGetPageReq) (m []models.SysDept, err
 	var list []models.SysDept
 	err = e.getList(c, &list)
 	for i := 0; i < len(list); i++ {
-		if list[i].ParentId != 0 {
-			continue
-		}
+		//fixme 找子的数据集合是getList获取的，当有条件查询的时候，getList获取到的集合数据只有当前部门一条。
+		// 导致找不到子。需修改
 		info := e.deptPageCall(&list, list[i])
 		m = append(m, info)
 	}
 	return
 }
 
+// deptPageCall 从deptlist中找到menu的子部门
 func (e *SysDept) deptPageCall(deptlist *[]models.SysDept, menu models.SysDept) models.SysDept {
 	list := *deptlist
 	min := make([]models.SysDept, 0)
 	for j := 0; j < len(list); j++ {
+		// 集合中的ParentId=当前menuId,此部门为当前部门的子部门
 		if menu.DeptId != list[j].ParentId {
 			continue
 		}

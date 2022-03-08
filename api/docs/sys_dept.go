@@ -17,8 +17,6 @@ type sysDeptGetPageWrapper struct {
 	DeptName string `json:"deptName"`
 	// in:query
 	DeptId string `json:"deptId"`
-	// in:query
-	Position string `json:"position"`
 }
 
 // swagger:route GET /api/v1/sys/dept/{deptId}  系统部门管理 sysDeptGet
@@ -51,7 +49,7 @@ type sysDeptInsertWrapper struct {
 	Body dto.SysDeptInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/dept  系统部门管理 sysDeptUpdate
+// swagger:route PUT /api/v1/sys/dept/{deptId}  系统部门管理 sysDeptUpdate
 //
 // 修改部门
 //
@@ -63,9 +61,9 @@ type sysDeptInsertWrapper struct {
 // swagger:parameters sysDeptUpdate
 type sysDeptUpdateWrapper struct {
 	// in:path
-	Id int `json:"id"`
+	DeptId int `json:"deptId"`
 	// in:body
-	Body dto.SysRoleUpdateReq
+	Body dto.SysDeptUpdateReq
 }
 
 // swagger:route DELETE /api/v1/sys/dept  系统部门管理 sysDeptDelete
@@ -82,14 +80,3 @@ type sysDeptDeleteWrapper struct {
 	// in:body
 	Body dto.SysRoleDeleteReq
 }
-
-// swagger:route GET /api/v1/sys/dept/dept-tree  系统部门管理 sysDeptTree
-//
-// 用户管理左侧部门树
-//
-//     Responses:
-//       success: successResponse
-//       error: errResponse
-//
-//
-// swagger:parameters sysDeptTree
