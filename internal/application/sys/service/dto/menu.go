@@ -18,7 +18,7 @@ func (m *SysMenuGetPageReq) GetNeedSearch() interface{} {
 }
 
 type SysMenuInsertReq struct {
-	MenuId     int             `uri:"id" comment:"编码"`            // 编码
+	MenuId     int             `uri:"id" comment:"编码"`
 	MenuName   string          `form:"menuName" comment:"菜单name"` //菜单name
 	Title      string          `form:"title" comment:"显示名称"`      //显示名称
 	Icon       string          `form:"icon" comment:"图标"`         //图标

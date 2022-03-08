@@ -916,21 +916,12 @@ paths:
       description: 创建菜单
       operationId: sysMenuInsert
       parameters:
-      - in: body
+      - example: 目录： {"parentId":0,"menuName":"TimeCard","icon":"archived","menuType":"M","apis":[],"sort":0,"action":"","isFrame":"1","visible":"0","title":"考勤管理","component":"Layout","path":"/timecard"}
+          菜单：{"parentId":552,"menuName":"StaffManage","icon":"add-doc","menuType":"C","apis":[141],"sort":0,"action":"","isFrame":"1","visible":"0","title":"员工管理","component":"/timecard/staff-manage/index","path":"/timecard/staff-manage","permission":"timecard:staffManage"}
+        in: body
         name: Body
         schema:
           $ref: '#/definitions/SysMenuInsertReq'
-      responses: {}
-      tags:
-      - 系统菜单管理
-    put:
-      description: 更新菜单
-      operationId: sysMenuUpdate
-      parameters:
-      - in: body
-        name: Body
-        schema:
-          $ref: '#/definitions/SysMenuUpdateReq'
       responses: {}
       tags:
       - 系统菜单管理
@@ -944,6 +935,23 @@ paths:
         required: true
         type: string
         x-go-name: Id
+      responses: {}
+      tags:
+      - 系统菜单管理
+    put:
+      description: 更新菜单
+      operationId: sysMenuUpdate
+      parameters:
+      - format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: Id
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysMenuUpdateReq'
       responses: {}
       tags:
       - 系统菜单管理

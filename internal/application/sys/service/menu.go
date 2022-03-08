@@ -126,7 +126,7 @@ func (e *SysMenu) Update(c *dto.SysMenuUpdateReq) error {
 	model.SysApi = alist
 	db := tx.Model(&model).Session(&gorm.Session{FullSaveAssociations: true}).Debug().Save(&model)
 	if db.Error != nil {
-		return errors.WithCode(code.ErrDatabase, err.Error())
+		return errors.WithCode(code.ErrDatabase, db.Error.Error())
 	}
 	if db.RowsAffected == 0 {
 		return errors.WithCode(code.ErrDatabase, "无权更新该数据")

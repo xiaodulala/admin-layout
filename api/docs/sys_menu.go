@@ -47,10 +47,11 @@ type sysMenuGetWrapper struct {
 // swagger:parameters sysMenuInsert
 type sysMenuInsertWrapper struct {
 	// in:body
+	// example: 目录： {"parentId":0,"menuName":"TimeCard","icon":"archived","menuType":"M","apis":[],"sort":0,"action":"","isFrame":"1","visible":"0","title":"考勤管理","component":"Layout","path":"/timecard"} 菜单：{"parentId":552,"menuName":"StaffManage","icon":"add-doc","menuType":"C","apis":[141],"sort":0,"action":"","isFrame":"1","visible":"0","title":"员工管理","component":"/timecard/staff-manage/index","path":"/timecard/staff-manage","permission":"timecard:staffManage"}
 	Body dto.SysMenuInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/menu  系统菜单管理 sysMenuUpdate
+// swagger:route PUT /api/v1/sys/menu/{id}  系统菜单管理 sysMenuUpdate
 //
 // 更新菜单
 //
@@ -62,6 +63,8 @@ type sysMenuInsertWrapper struct {
 
 // swagger:parameters sysMenuUpdate
 type sysMenuUpdateWrapper struct {
+	// in:path
+	Id int `json:"id"`
 	// in:body
 	Body dto.SysMenuUpdateReq
 }
