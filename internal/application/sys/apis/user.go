@@ -19,14 +19,6 @@ type SysUser struct {
 	api.Api
 }
 
-// GetPage
-// @Summary 列表用户信息数据
-// @Description 获取JSON
-// @Tags 用户
-// @Param username query string false "username"
-// @Success 200 {string} {object} httpresponse.Response "{"code": 200, "data": [...]}"
-// @Router /api/v1/sys-user [get]
-// @Security Bearer
 func (su SysUser) GetPage(c *gin.Context) {
 	s := service.SysUser{}
 	req := dto.SysUserGetPageReq{}

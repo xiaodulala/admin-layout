@@ -68,7 +68,7 @@ type sysUserUpdateWrapper struct {
 	Body dto.SysUserUpdateReq
 }
 
-// swagger:route DELETE /api/v1/sys/user  系统用户管理 sysUserDelete
+// swagger:route DELETE /api/v1/sys/user/{userId}  系统用户管理 sysUserDelete
 //
 // 删除用户
 //

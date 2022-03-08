@@ -2,7 +2,7 @@ package docs
 
 import "github.com/xiaodulala/admin-layout/internal/application/sys/service/dto"
 
-// swagger:route GET /api/v1/sys/dept  部门管理 sysDeptGetPage
+// swagger:route GET /api/v1/sys/dept  系统部门管理 sysDeptGetPage
 //
 // 分页查询部门
 //
@@ -21,7 +21,7 @@ type sysDeptGetPageWrapper struct {
 	Position string `json:"position"`
 }
 
-// swagger:route GET /api/v1/sys/dept/{deptId}  部门管理 sysDeptGet
+// swagger:route GET /api/v1/sys/dept/{deptId}  系统部门管理 sysDeptGet
 //
 // 获取部门数据
 //
@@ -36,7 +36,7 @@ type sysDeptGetWrapper struct {
 	DeptId string `json:"deptId"`
 }
 
-// swagger:route POST /api/v1/sys/dept  部门管理 sysDeptInsert
+// swagger:route POST /api/v1/sys/dept  系统部门管理 sysDeptInsert
 //
 // 添加部门
 //
@@ -51,7 +51,7 @@ type sysDeptInsertWrapper struct {
 	Body dto.SysDeptInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/dept  部门管理 sysDeptUpdate
+// swagger:route PUT /api/v1/sys/dept  系统部门管理 sysDeptUpdate
 //
 // 修改部门
 //
@@ -68,7 +68,7 @@ type sysDeptUpdateWrapper struct {
 	Body dto.SysRoleUpdateReq
 }
 
-// swagger:route DELETE /api/v1/sys/dept  部门管理 sysDeptDelete
+// swagger:route DELETE /api/v1/sys/dept  系统部门管理 sysDeptDelete
 //
 // 删除部门
 //
@@ -83,7 +83,7 @@ type sysDeptDeleteWrapper struct {
 	Body dto.SysRoleDeleteReq
 }
 
-// swagger:route GET /api/v1/sys/dept/dept-tree  部门管理 sysDeptTree
+// swagger:route GET /api/v1/sys/dept/dept-tree  系统部门管理 sysDeptTree
 //
 // 用户管理左侧部门树
 //

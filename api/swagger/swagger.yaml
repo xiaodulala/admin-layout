@@ -60,6 +60,24 @@ definitions:
         x-go-name: RequestId
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/pkg/httpresponse
+  RoleDataScopeReq:
+    description: RoleDataScopeReq 角色数据权限修改
+    properties:
+      dataScope:
+        type: string
+        x-go-name: DataScope
+      deptIds:
+        items:
+          format: int64
+          type: integer
+        type: array
+        x-go-name: DeptIds
+      roleId:
+        format: int64
+        type: integer
+        x-go-name: RoleId
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   SysApi:
     properties:
       action:
@@ -312,6 +330,56 @@ definitions:
         x-go-name: Ids
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  SysRoleInsertReq:
+    properties:
+      Admin:
+        type: boolean
+      DataScope:
+        type: string
+      DeptIds:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Flag:
+        type: string
+      MenuIds:
+        items:
+          format: int64
+          type: integer
+        type: array
+      Remark:
+        type: string
+      RoleId:
+        format: int64
+        type: integer
+      RoleKey:
+        type: string
+      RoleName:
+        type: string
+      RoleSort:
+        format: int64
+        type: integer
+      Status:
+        type: string
+      SysDept:
+        items:
+          $ref: '#/definitions/SysDept'
+        type: array
+      SysMenu:
+        items:
+          $ref: '#/definitions/SysMenu'
+        type: array
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   SysRoleUpdateReq:
     properties:
       Admin:
@@ -469,6 +537,23 @@ definitions:
         x-go-name: Username
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
+  UpdateStatusReq:
+    properties:
+      RoleId:
+        format: int64
+        type: integer
+      Status:
+        type: string
+      createBy:
+        format: int64
+        type: integer
+        x-go-name: CreateBy
+      updateBy:
+        format: int64
+        type: integer
+        x-go-name: UpdateBy
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/application/sys/service/dto
   UpdateSysUserStatusReq:
     properties:
       createBy:
@@ -504,7 +589,7 @@ paths:
           $ref: '#/definitions/SysRoleDeleteReq'
       responses: {}
       tags:
-      - 部门管理
+      - 系统部门管理
     get:
       description: 分页查询部门
       operationId: sysDeptGetPage
@@ -523,7 +608,7 @@ paths:
         x-go-name: Position
       responses: {}
       tags:
-      - 部门管理
+      - 系统部门管理
     post:
       description: 添加部门
       operationId: sysDeptInsert
@@ -534,7 +619,7 @@ paths:
           $ref: '#/definitions/SysDeptInsertReq'
       responses: {}
       tags:
-      - 部门管理
+      - 系统部门管理
     put:
       description: 修改部门
       operationId: sysDeptUpdate
@@ -551,7 +636,7 @@ paths:
           $ref: '#/definitions/SysRoleUpdateReq'
       responses: {}
       tags:
-      - 部门管理
+      - 系统部门管理
   /api/v1/sys/dept/{deptId}:
     get:
       description: 获取部门数据
@@ -564,27 +649,115 @@ paths:
         x-go-name: DeptId
       responses: {}
       tags:
-      - 部门管理
+      - 系统部门管理
   /api/v1/sys/dept/dept-tree:
     get:
       description: 用户管理左侧部门树
       operationId: sysDeptTree
       responses: {}
       tags:
-      - 部门管理
-  /api/v1/sys/user:
+      - 系统部门管理
+  /api/v1/sys/role:
     delete:
-      description: 删除用户
-      operationId: sysUserDelete
+      description: 删除角色
+      operationId: sysRoleDelete
       parameters:
-      - in: path
-        name: userId
-        required: true
-        type: string
-        x-go-name: UserId
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysRoleDeleteReq'
       responses: {}
       tags:
-      - 系统用户管理
+      - 系统角色管理
+    get:
+      description: 分页查询角色
+      operationId: sysRoleGetPage
+      parameters:
+      - in: query
+        name: roleName
+        type: string
+        x-go-name: RoleName
+      - in: query
+        name: status
+        type: string
+        x-go-name: Status
+      - in: query
+        name: roleKey
+        type: string
+        x-go-name: RoleKey
+      - format: int64
+        in: query
+        name: pageSize
+        type: integer
+        x-go-name: PageSize
+      - format: int64
+        in: query
+        name: pageIndex
+        type: integer
+        x-go-name: PageIndex
+      responses: {}
+      tags:
+      - 系统角色管理
+    post:
+      description: 创建角色
+      operationId: sysRoleInsert
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysRoleInsertReq'
+      responses: {}
+      tags:
+      - 系统角色管理
+    put:
+      description: 更新角色
+      operationId: sysRoleUpdate
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysRoleUpdateReq'
+      responses: {}
+      tags:
+      - 系统角色管理
+  /api/v1/sys/role-scope:
+    put:
+      description: 更新角色数据权限
+      operationId: sysRoleUpdateDataScope
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/RoleDataScopeReq'
+      responses: {}
+      tags:
+      - 系统角色管理
+  /api/v1/sys/role-status:
+    put:
+      description: 更新角色状态
+      operationId: sysRoleUpdateStatue
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/UpdateStatusReq'
+      responses: {}
+      tags:
+      - 系统角色管理
+  /api/v1/sys/role/{roleId}:
+    get:
+      description: 查询角色信息
+      operationId: sysRoleGet
+      parameters:
+      - in: path
+        name: roleId
+        required: true
+        type: string
+        x-go-name: RoleId
+      responses: {}
+      tags:
+      - 系统角色管理
+  /api/v1/sys/user:
     get:
       description: 分页查询用户
       operationId: sysUserGetPage
@@ -619,6 +792,18 @@ paths:
       tags:
       - 系统用户管理
   /api/v1/sys/user/{userId}:
+    delete:
+      description: 删除用户
+      operationId: sysUserDelete
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        type: string
+        x-go-name: UserId
+      responses: {}
+      tags:
+      - 系统用户管理
     get:
       description: 查询用户
       operationId: sysUserGet
