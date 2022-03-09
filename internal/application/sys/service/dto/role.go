@@ -62,7 +62,7 @@ func (s *SysRoleInsertReq) Generate(model *models.SysRole) {
 	model.Admin = s.Admin
 	model.DataScope = s.DataScope
 	model.SysMenu = &s.SysMenu
-	model.SysDept = s.SysDept
+	model.SysDept = &s.SysDept
 }
 
 func (s *SysRoleInsertReq) GetId() interface{} {
@@ -99,7 +99,7 @@ func (s *SysRoleUpdateReq) Generate(model *models.SysRole) {
 	model.Admin = s.Admin
 	model.DataScope = s.DataScope
 	model.SysMenu = &s.SysMenu
-	model.SysDept = s.SysDept
+	model.SysDept = &s.SysDept
 }
 
 func (s *SysRoleUpdateReq) GetId() interface{} {

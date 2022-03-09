@@ -168,7 +168,8 @@ func (e *SysRole) UpdateDataScope(c *dto.RoleDataScopeReq) error {
 		return errors.WithCode(code.ErrDatabase, err.Error())
 	}
 	c.Generate(&model)
-	model.SysDept = dlist
+	// fixme 无法插入角色部门关联表
+	model.SysDept = &dlist
 	db := tx.Model(&model).Session(&gorm.Session{FullSaveAssociations: true}).Debug().Save(&model)
 	if db.Error != nil {
 		return errors.WithCode(code.ErrDatabase, db.Error.Error())

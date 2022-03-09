@@ -52,10 +52,11 @@ type sysRoleGetWrapper struct {
 // swagger:parameters sysRoleInsert
 type sysRoleInsertWrapper struct {
 	// in:body
+	// example: {"roleName":"财务总监","roleKey":"account","roleSort":1,"status":"2","menuIds":[3,43,44,45,46],"deptIds":[],"sysMenu":[]}
 	Body dto.SysRoleInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/role  系统角色管理 sysRoleUpdate
+// swagger:route PUT /api/v1/sys/role/{id}  系统角色管理 sysRoleUpdate
 //
 // 更新角色
 //
@@ -66,6 +67,8 @@ type sysRoleInsertWrapper struct {
 //
 // swagger:parameters sysRoleUpdate
 type sysRoleUpdateWrapper struct {
+	// in:path
+	Id int `json:"id"`
 	// in:body
 	Body dto.SysRoleUpdateReq
 }
@@ -85,7 +88,7 @@ type sysRoleDeleteWrapper struct {
 	Body dto.SysRoleDeleteReq
 }
 
-// swagger:route PUT /api/v1/sys/role-status  系统角色管理 sysRoleUpdateStatue
+// swagger:route PUT /api/v1/sys/role/role-status  系统角色管理 sysRoleUpdateStatue
 //
 // 更新角色状态
 //
@@ -100,7 +103,7 @@ type sysRoleUpdateStatueWrapper struct {
 	Body dto.UpdateStatusReq
 }
 
-// swagger:route PUT /api/v1/sys/role-scope  系统角色管理 sysRoleUpdateDataScope
+// swagger:route PUT /api/v1/sys/role/role-scope  系统角色管理 sysRoleUpdateDataScope
 //
 // 更新角色数据权限
 //
