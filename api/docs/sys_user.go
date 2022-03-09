@@ -49,10 +49,11 @@ type sysUserGetWrapper struct {
 // swagger:parameters sysUserInsert
 type sysUserInsertWrapper struct {
 	// in:body
+	// example: {"deptId":11,"username":"zhangsan","nickName":"zhangsan","password":"nihao","phone":"13811111111","email":"1@qq.com","sex":"0","status":"2","postId":4,"roleId":3}
 	Body dto.SysUserInsertReq
 }
 
-// swagger:route PUT /api/v1/sys/user  系统用户管理 sysUserUpdate
+// swagger:route PUT /api/v1/sys/user/{userId}  系统用户管理 sysUserUpdate
 //
 // 更新用户
 //
@@ -64,6 +65,8 @@ type sysUserInsertWrapper struct {
 
 // swagger:parameters sysUserUpdate
 type sysUserUpdateWrapper struct {
+	// in:path
+	UserId int `json:"userId"`
 	// in:body
 	Body dto.SysUserUpdateReq
 }
