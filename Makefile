@@ -47,54 +47,54 @@ export USAGE_OPTIONS
 # ==============================================================================
 # Targets
 
-## clean: Remove all files that are created by building.
+## clean: 删除编译时产生的所有文件.
 .PHONY: clean
 clean:
 	@echo "===========> Cleaning all build output"
 	@-rm -vrf $(OUTPUT_DIR)
 
-## build: Build source code for host platform.
+## build: 根据当前平台编译对应的application可执行文件.
 .PHONY: build
 build:
 	@$(MAKE) go.build
 
 
-## build.multiarch: Build source code for multiple platforms. See option PLATFORMS.
+## build.multiarch: 编译多平台的可执行文件. See option PLATFORMS.
 .PHONY: build.multiarch
 build.multiarch:
 	@$(MAKE) go.build.multiarch
 
 
-## lint: Check syntax and styling of go sources.
+## lint: 代码静态检查.
 .PHONY: lint
 lint:
 	@$(MAKE) go.lint
 
-## install: Install iam system with all its components.
+## install: 安装开发项目时的所有工具(网络不好请重试).
 .PHONY: install
 install:
 	@$(MAKE) tools.install
 
-## swagger: Generate swagger document.
+## swagger: 生成swagger文档.
 .PHONY: swagger
 swagger:
 	@$(MAKE) swagger.run
-## serve-swagger: Serve swagger spec and docs.
-.PHONY: swagger.serve
+## serve-swagger: 启动swagger接口服务
+.PHONY: serve-swagger
 serve-swagger:
 	@$(MAKE) swagger.serve
 
-## tidy
+## tidy: 安装go mod 依赖
 .PHONY: tidy
 tidy:
 	@$(GO) mod tidy -go=1.17
 
-## image: Build docker images for host arch
+## image: 以当前平台制作镜像
 .PHONY: image
 image:
 	@$(MAKE) image.build
 
-## image.multiarch: Build docker images for multiple platforms. See option PLATFORMS.
+## image.multiarch: 生成多平台镜像. See option PLATFORMS.
 .PHONY: image.multiarch
 image.multiarch:
 	@$(MAKE) image.build.multiarch
