@@ -12,12 +12,9 @@
 //     - application/json
 //
 //     Security:
-//     - basic
 //     - api_key
 //
 //    SecurityDefinitions:
-//    basic:
-//      type: basic
 //    api_key:
 //      type: apiKey
 //      name: Authorization

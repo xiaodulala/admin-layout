@@ -12,6 +12,7 @@ import (
 	"github.com/xiaodulala/admin-layout/pkg/middleware"
 	"github.com/xiaodulala/admin-layout/pkg/version"
 	"mime"
+	"net/http"
 )
 
 var appRouters = make([]func(engine *gin.Engine, authMiddleware *jwt.GinJWTMiddleware), 0)
@@ -68,6 +69,16 @@ func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 	engine.POST("/login", authMiddleware.LoginHandler)
 	engine.GET("/logout", authMiddleware.LogoutHandler)
 	engine.GET("/refresh-token", authMiddleware.RefreshHandler)
+	engine.GET("/claims", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			middleware.UserId:    middleware.GetUserId(c),
+			middleware.Username:  middleware.GetUserId(c),
+			middleware.RoleId:    middleware.GetRoleId(c),
+			middleware.RoleKey:   middleware.GetRoleKey(c),
+			middleware.RoleName:  middleware.GetRoleName(c),
+			middleware.DataScope: middleware.GetDataScope(c),
+		})
+	}).Use(authMiddleware.MiddlewareFunc())
 
 	// 系统路由和业务路由
 	for _, f := range appRouters {

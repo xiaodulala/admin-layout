@@ -20,6 +20,16 @@ definitions:
         x-go-name: RequestId
     type: object
     x-go-package: github.com/xiaodulala/admin-layout/pkg/httpresponse
+  Login:
+    properties:
+      password:
+        type: string
+        x-go-name: Password
+      username:
+        type: string
+        x-go-name: Username
+    type: object
+    x-go-package: github.com/xiaodulala/admin-layout/internal/pkg/ginauth
   PassWord:
     description: PassWord 密码
     properties:
@@ -1177,21 +1187,11 @@ paths:
       description: 创建用户
       operationId: sysUserInsert
       parameters:
-      - in: body
+      - example: '{"deptId":11,"username":"zhangsan","nickName":"zhangsan","password":"nihao","phone":"13811111111","email":"1@qq.com","sex":"0","status":"2","postId":4,"roleId":3}'
+        in: body
         name: Body
         schema:
           $ref: '#/definitions/SysUserInsertReq'
-      responses: {}
-      tags:
-      - 系统用户管理
-    put:
-      description: 更新用户
-      operationId: sysUserUpdate
-      parameters:
-      - in: body
-        name: Body
-        schema:
-          $ref: '#/definitions/SysUserUpdateReq'
       responses: {}
       tags:
       - 系统用户管理
@@ -1217,6 +1217,23 @@ paths:
         required: true
         type: string
         x-go-name: UserId
+      responses: {}
+      tags:
+      - 系统用户管理
+    put:
+      description: 更新用户
+      operationId: sysUserUpdate
+      parameters:
+      - format: int64
+        in: path
+        name: userId
+        required: true
+        type: integer
+        x-go-name: UserId
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/SysUserUpdateReq'
       responses: {}
       tags:
       - 系统用户管理
@@ -1268,6 +1285,32 @@ paths:
       responses: {}
       tags:
       - 系统用户管理
+  /login:
+    post:
+      description: 用户登录
+      operationId: login
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/Login'
+      responses: {}
+      tags:
+      - 认证
+  /logout:
+    get:
+      description: 用户登录
+      operationId: logout
+      responses: {}
+      tags:
+      - 认证
+  /refresh-token:
+    get:
+      description: 用户登录
+      operationId: refresh
+      responses: {}
+      tags:
+      - 认证
 produces:
 - application/json
 responses:
@@ -1287,6 +1330,4 @@ securityDefinitions:
     in: header
     name: Authorization
     type: apiKey
-  basic:
-    type: basic
 swagger: "2.0"

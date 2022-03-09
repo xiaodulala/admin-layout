@@ -80,13 +80,15 @@ func authenticator(c *gin.Context) (interface{}, error) {
 		return nil, jwt.ErrMissingLoginValues
 	}
 
+	// todo 验证码验证
+
 	db := runtime.RunTime.Orm()
 	user, role, err := loginInfo.GetUser(db)
 	if err != nil {
 		log.Warnf("%s login failed!", loginInfo.Username)
 		return nil, jwt.ErrFailedAuthentication
 	}
-	return map[string]interface{}{"user": user, "role": role}, nil
+	return map[string]interface{}{"user": &user, "role": &role}, nil
 }
 
 func authorizator(data interface{}, c *gin.Context) bool {
