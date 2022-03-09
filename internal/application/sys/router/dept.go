@@ -12,7 +12,7 @@ func init() {
 
 func registerSysDeptRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	api := apis.SysDept{}
-	r := g.Group("/dept")
+	r := g.Group("/dept").Use(authMiddleware.MiddlewareFunc())
 	{
 		r.GET("", api.GetPage)
 		r.GET("/:deptId", api.Get)

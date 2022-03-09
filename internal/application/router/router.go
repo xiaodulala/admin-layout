@@ -1,9 +1,11 @@
 package router
 
 import (
+	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	"github.com/xiaodulala/admin-layout/internal/application/config"
 	"github.com/xiaodulala/admin-layout/internal/pkg/code"
+	"github.com/xiaodulala/admin-layout/internal/pkg/ginauth"
 	"github.com/xiaodulala/admin-layout/pkg/errors"
 	"github.com/xiaodulala/admin-layout/pkg/httpresponse"
 	"github.com/xiaodulala/admin-layout/pkg/log"
@@ -12,7 +14,7 @@ import (
 	"mime"
 )
 
-var appRouters = make([]func(engine *gin.Engine), 0)
+var appRouters = make([]func(engine *gin.Engine, authMiddleware *jwt.GinJWTMiddleware), 0)
 
 func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 	// 必须的插件
@@ -56,10 +58,19 @@ func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 		engine.Static("/form-generator", "./static/form-generator")
 	}
 
-	// swagger 单独
+	// swagger
+
+	// 登录  登出 刷新token
+	authMiddleware, err := ginauth.JWTAuth()
+	if err != nil {
+		panic(err)
+	}
+	engine.POST("/login", authMiddleware.LoginHandler)
+	engine.GET("/logout", authMiddleware.LogoutHandler)
+	engine.GET("/refresh-token", authMiddleware.RefreshHandler)
 
 	// 系统路由和业务路由
 	for _, f := range appRouters {
-		f(engine)
+		f(engine, authMiddleware)
 	}
 }

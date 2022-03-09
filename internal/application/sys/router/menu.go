@@ -12,7 +12,7 @@ func init() {
 
 func registerSysMenuRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	api := apis.SysMenu{}
-	r := g.Group("/menu")
+	r := g.Group("/menu").Use(authMiddleware.MiddlewareFunc())
 	{
 		r.GET("", api.GetPage)
 		r.GET("/:id", api.Get)

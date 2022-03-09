@@ -12,7 +12,7 @@ func init() {
 
 func registerSysUserRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	api := apis.SysUser{}
-	r := g.Group("/user")
+	r := g.Group("/user").Use(authMiddleware.MiddlewareFunc())
 	{
 		r.GET("", api.GetPage)
 		r.GET("/:id", api.Get)

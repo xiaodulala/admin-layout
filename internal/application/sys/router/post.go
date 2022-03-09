@@ -12,7 +12,7 @@ func init() {
 
 func registerSysPostRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	api := apis.SysPost{}
-	r := g.Group("/post")
+	r := g.Group("/post").Use(authMiddleware.MiddlewareFunc())
 	{
 		r.GET("", api.GetPage)
 		r.GET("/:id", api.Get)

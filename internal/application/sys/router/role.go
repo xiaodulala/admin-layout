@@ -12,7 +12,7 @@ func init() {
 
 func registerSysRoleRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {
 	api := apis.SysRole{}
-	r := g.Group("/role")
+	r := g.Group("/role", authMiddleware.MiddlewareFunc())
 	{
 		r.GET("", api.GetPage)
 		r.GET("/:id", api.Get)

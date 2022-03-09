@@ -10,7 +10,7 @@ var (
 	routerCheckRole   = make([]func(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware), 0)
 )
 
-func InitRouter(engine *gin.Engine) {
+func InitRouter(engine *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) {
 	// 注册系统业务路由
 	g := engine.Group("/api/v1/sys")
 
@@ -21,6 +21,6 @@ func InitRouter(engine *gin.Engine) {
 
 	// 需要认证的路由
 	for _, f := range routerCheckRole {
-		f(g, nil)
+		f(g, authMiddleware)
 	}
 }
