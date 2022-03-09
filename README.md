@@ -42,17 +42,18 @@ make help
 Usage: make <TARGETS> <OPTIONS> ...
 
 Targets:
-  clean             Remove all files that are created by building.
-  build             Build source code for host platform.
-  build.multiarch   Build source code for multiple platforms. See option PLATFORMS.
-  lint              Check syntax and styling of go sources.
-  install           Install iam system with all its components.
-  swagger           Generate swagger document.
-  serve-swagger     Serve swagger spec and docs.
-  tidy
-  image             Build docker images for host arch
-  image.multiarch   Build docker images for multiple platforms. See option PLATFORMS.
+  clean             删除编译时产生的所有文件.
+  build             根据当前平台编译对应的application可执行文件.
+  build.multiarch   编译多平台的可执行文件. See option PLATFORMS.
+  lint              代码静态检查.
+  install           安装开发项目时的所有工具(网络不好请重试).
+  swagger           生成swagger文档.
+  serve-swagger     启动swagger接口服务
+  tidy              安装go mod 依赖
+  image             以当前平台制作镜像
+  image.multiarch   生成多平台镜像. See option PLATFORMS.
   help              Show this help info.
+
 ```
 
 * 编译出来的命令一共有两个
