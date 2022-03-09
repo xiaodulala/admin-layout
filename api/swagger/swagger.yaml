@@ -1285,6 +1285,13 @@ paths:
       responses: {}
       tags:
       - 系统用户管理
+  /claims:
+    get:
+      description: token载荷参数解析
+      operationId: claims
+      responses: {}
+      tags:
+      - 认证
   /login:
     post:
       description: 用户登录
@@ -1325,6 +1332,8 @@ responses:
 schemes:
 - http
 - https
+security:
+- api_key: []
 securityDefinitions:
   api_key:
     in: header

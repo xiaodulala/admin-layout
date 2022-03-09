@@ -36,3 +36,13 @@ type loginWrapper struct {
 //       error: errResponse
 //
 //
+
+// swagger:route GET /claims  认证 claims
+//
+// token载荷参数解析
+//
+//     Responses:
+//       success: successResponse
+//       error: errResponse
+//
+//

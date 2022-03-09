@@ -12,14 +12,13 @@
 //     - application/json
 //
 //     Security:
-//     - api_key
+//     - api_key:
 //
 //    SecurityDefinitions:
-//    api_key:
-//      type: apiKey
-//      name: Authorization
-//      in: header
-//
+//     api_key:
+//          type: apiKey
+//          name: Authorization
+//          in: header
 // swagger:meta
 package docs
 

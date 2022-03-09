@@ -27,7 +27,7 @@ func Context() gin.HandlerFunc {
 }
 
 func GetUserId(c *gin.Context) int {
-	return c.GetInt(UserId)
+	return int(c.GetFloat64(UserId))
 }
 
 func GetUserName(c *gin.Context) string {
@@ -35,7 +35,7 @@ func GetUserName(c *gin.Context) string {
 }
 
 func GetRoleId(c *gin.Context) int {
-	return c.GetInt(RoleId)
+	return int(c.GetFloat64(RoleId))
 }
 
 func GetRoleKey(c *gin.Context) string {

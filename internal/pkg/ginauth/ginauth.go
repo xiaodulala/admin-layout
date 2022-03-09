@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/xiaodulala/admin-layout/internal/application/sys/models"
 	"github.com/xiaodulala/admin-layout/internal/pkg/runtime"
+	"github.com/xiaodulala/admin-layout/pkg/httpresponse"
 	"github.com/xiaodulala/admin-layout/pkg/log"
 	"github.com/xiaodulala/admin-layout/pkg/middleware"
 	"time"
@@ -24,13 +25,13 @@ func JWTAuth() (*jwt.GinJWTMiddleware, error) {
 		Authorizator:     authorizator,
 		Unauthorized:     unauthorized,
 		LoginResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			c.JSON(code, gin.H{"token": token, "expire": expire.Format(time.RFC3339)})
+			httpresponse.WriteSuccessResponse(c, gin.H{"token": "Bearer " + token, "expire": expire.Format(time.RFC3339)})
 		},
 		LogoutResponse: func(c *gin.Context, code int) {
-			c.JSON(code, nil)
+			httpresponse.WriteSuccessResponse(c, nil)
 		},
 		RefreshResponse: func(c *gin.Context, code int, token string, expire time.Time) {
-			c.JSON(code, gin.H{"token": token, "expire": expire.Format(time.RFC3339)})
+			httpresponse.WriteSuccessResponse(c, gin.H{"token": "Bearer " + token, "expire": expire.Format(time.RFC3339)})
 		},
 		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName: "Bearer",
