@@ -45,7 +45,7 @@ func LoadRouter(cfg *config.Config, engine *gin.Engine) {
 		httpresponse.WriteSuccessResponse(c, map[string]string{"status": "ok"})
 	})
 
-	engine.GET("version", func(c *gin.Context) {
+	engine.GET("sys-version", func(c *gin.Context) {
 		httpresponse.WriteSuccessResponse(c, version.Get())
 	})
 

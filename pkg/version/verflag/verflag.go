@@ -56,14 +56,14 @@ func (v *VersionValue) String() string {
 
 // Type The type of the flag as required by the pflag.Value interface.
 func (v *VersionValue) Type() string {
-	return "version"
+	return "sys-version"
 }
 
 // VersionVar defines a flag with the specified name and usage string.
 func VersionVar(p *VersionValue, name string, value VersionValue, usage string) {
 	*p = value
 	pflag.Var(p, name, usage)
-	// "--version" will be treated as "--version=true"
+	// "--sys-version" will be treated as "--sys-version=true"
 	pflag.Lookup(name).NoOptDefVal = "true"
 }
 
@@ -74,9 +74,9 @@ func Version(name string, value VersionValue, usage string) *VersionValue {
 	return p
 }
 
-const versionFlagName = "version"
+const versionFlagName = "sys-version"
 
-var versionFlag = Version(versionFlagName, VersionFalse, "Print version information and quit.")
+var versionFlag = Version(versionFlagName, VersionFalse, "Print sys-version information and quit.")
 
 // AddFlags registers this package's flags on arbitrary FlagSets, such that they point to the
 // same value as the global flags.
@@ -84,8 +84,8 @@ func AddFlags(fs *pflag.FlagSet) {
 	fs.AddFlag(pflag.Lookup(versionFlagName))
 }
 
-// PrintAndExitIfRequested will check if the -version flag was passed
-// and, if so, print the version and exit.
+// PrintAndExitIfRequested will check if the -sys-version flag was passed
+// and, if so, print the sys-version and exit.
 func PrintAndExitIfRequested() {
 	if *versionFlag == VersionRaw {
 		fmt.Printf("%#v\n", version.Get())

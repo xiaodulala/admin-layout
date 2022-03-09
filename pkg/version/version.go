@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	// GitVersion is semantic version.
+	// GitVersion is semantic sys-version.
 	GitVersion = "v0.0.0-master+$Format:%h$"
 	// BuildDate in ISO8601 format, output of $(date -u +'%Y-%m-%dT%H:%M:%SZ').
 	BuildDate = "1970-01-01T00:00:00Z"
@@ -31,7 +31,7 @@ type Info struct {
 	Platform     string `json:"platform"`
 }
 
-// String returns info as a human-friendly version string.
+// String returns info as a human-friendly sys-version string.
 func (info Info) String() string {
 	if s, err := info.Text(); err == nil {
 		return string(s)
@@ -40,14 +40,14 @@ func (info Info) String() string {
 	return info.GitVersion
 }
 
-// ToJSON returns the JSON string of version information.
+// ToJSON returns the JSON string of sys-version information.
 func (info Info) ToJSON() string {
 	s, _ := json.Marshal(info)
 
 	return string(s)
 }
 
-// Text encodes the version information into UTF-8-encoded text and
+// Text encodes the sys-version information into UTF-8-encoded text and
 // returns the result.
 func (info Info) Text() ([]byte, error) {
 	table := uitable.New()
@@ -65,11 +65,11 @@ func (info Info) Text() ([]byte, error) {
 	return table.Bytes(), nil
 }
 
-// Get returns the overall codebase version. It's for detecting
+// Get returns the overall codebase sys-version. It's for detecting
 // what code a binary was built from.
 func Get() Info {
 	// These variables typically come from -ldflags settings and in
-	// their absence fallback to the settings in pkg/version/base.go
+	// their absence fallback to the settings in pkg/sys-version/base.go
 	return Info{
 		GitVersion:   GitVersion,
 		GitCommit:    GitCommit,

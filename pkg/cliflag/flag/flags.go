@@ -20,7 +20,7 @@ func WordSepNormalizeFunc(f *pflag.FlagSet, name string) pflag.NormalizedName {
 func WarnWordSepNormalizeFunc(f *pflag.FlagSet, name string) pflag.NormalizedName {
 	if strings.Contains(name, "_") {
 		nname := strings.ReplaceAll(name, "_", "-")
-		fmt.Printf("%s is DEPRECATED and will be removed in a future version. Use %s instead.", name, nname)
+		fmt.Printf("%s is DEPRECATED and will be removed in a future sys-version. Use %s instead.", name, nname)
 		return pflag.NormalizedName(nname)
 	}
 	return pflag.NormalizedName(name)
