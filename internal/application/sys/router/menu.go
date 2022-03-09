@@ -20,5 +20,6 @@ func registerSysMenuRouter(g *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddlew
 		r.PUT("/:id", api.Update)
 		r.DELETE("", api.Delete)
 		r.GET("/menu-role", api.GetMenuRole)
+		r.GET("/menu-tree/:roleId", api.GetMenuTreeSelect)
 	}
 }

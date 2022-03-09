@@ -133,7 +133,7 @@ func (e SysMenu) GetMenuRole(c *gin.Context) {
 		return
 	}
 
-	result, err := s.SetMenuRole(middleware.GetRoleName(c))
+	result, err := s.SetMenuRole(middleware.GetRoleKey(c))
 
 	if err != nil {
 		httpresponse.WriteErrResponse(c, err, nil)
