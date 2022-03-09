@@ -115,3 +115,4 @@ testmk:
 	@echo $(addprefix image.build., $(addprefix $(IMAGE_PLAT)., $(IMAGES)))
 	@echo $(addprefix go.build., $(addprefix $(PLATFORM)., $(ROOT_DIR)))
 	@echo $(ROOT_PACKAGE)
+	@echo $(filter-out %docs, $(wildcard ${ROOT_DIR}/cmd/*))
