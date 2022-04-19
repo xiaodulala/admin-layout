@@ -39,7 +39,7 @@ func _1599190683659Tables(db *gorm.DB, version string) error {
 			return err
 		}
 		if err := models.InitDb(tx); err != nil {
-
+			return err
 		}
 		return tx.Create(&models.Migration{
 			Version: version,
